@@ -1,113 +1,72 @@
-/* Estilos del loader alineados al GD Design System */
-/* Paleta estricta: usar SOLO colores definidos en .github/linters/gd-color-rules.json */
-html, body {
-	height: 100%;
-	margin: 0;
-	background: #121212; /* fondo oscuro requerido por el design system */
-	display: flex;
-	align-items: center;
-	justify-content: center;
+/* ============================================================
+   GD Arquitectura — LOADER.CSS (versión estable)
+   ============================================================ */
+
+@keyframes revealX {
+    from { x: -210px; }
+    to   { x: 0; }
+}
+@keyframes revealY {
+    from { y: -170px; }
+    to   { y: 0; }
 }
 
-svg {
-	width: min(95vw, 900px);
-	height: auto;
-	overflow: visible;
+@keyframes revealLeftToRight {
+    from { x: -210px; }
+    to   { x: 0; }
+}
+@keyframes revealRightToLeft {
+    from { x: 210px; }
+    to   { x: 0; }
+}
+@keyframes revealTopToBottom {
+    from { y: -170px; }
+    to   { y: 0; }
+}
+@keyframes revealBottomToTop {
+    from { y: 170px; }
+    to   { y: 0; }
 }
 
-/* === TRAZOS === */
-/* Líneas técnicas: usar gris técnico digital */
-.str0 {
-	stroke: #C4C3C4;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	stroke-miterlimit: 22.9256;
-	stroke-dasharray: 5 3 1 3;
-	fill: none;
+@keyframes drawLine {
+    to { stroke-dashoffset: 0; }
 }
 
-.str1 {
-	stroke: #C4C3C4;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	stroke-miterlimit: 22.9256;
-	fill: none;
+/* ====== Líneas punteadas ====== */
+#rectX {
+    animation: revealX 0.71s cubic-bezier(0.55, 0.08, 0.44, 0.99) forwards;
 }
 
-/* Trazos base (gris técnico) */
+#rectY {
+    animation: revealY 0.71s cubic-bezier(0.55, 0.08, 0.44, 0.99) forwards;
+    animation-delay: 0.64s;
+}
+
+/* ====== Marco ====== */
+#rectTop    { animation: revealLeftToRight 0.36s ease-in-out forwards; animation-delay: 1.38s; }
+#rectRight  { animation: revealTopToBottom 0.36s ease-in-out forwards; animation-delay: 1.68s; }
+#rectBottom { animation: revealRightToLeft 0.36s ease-in-out forwards; animation-delay: 2.00s; }
+#rectLeft   { animation: revealBottomToTop 0.36s ease-in-out forwards; animation-delay: 2.31s; }
+
+/* ====== Gris técnico ====== */
 .str2 {
-	stroke: #C4C3C4;
-	stroke-width: 0.75;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	stroke-miterlimit: 22.9256;
-	fill: none;
-	stroke-dasharray: 2000;
-	stroke-dashoffset: 2000;
-	/* animación de trazado: líneas primero */
-	animation: drawGrey 0.8s cubic-bezier(0.65,0,0.35,1) forwards;
-	animation-delay: 0s;
+    animation: drawLine 4.76s ease-out forwards;
+    animation-delay: 2.62s;
 }
 
-/* G (rojo) mantiene el rojo oficial */
+/* ====== G ====== */
 .str3 {
-	stroke: #FF0009;
-	stroke-width: 0.75;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	stroke-miterlimit: 22.9256;
-	fill: none;
-	stroke-dasharray: 2000;
-	stroke-dashoffset: 2000;
-	animation: drawGinner 0.5s cubic-bezier(0.65,0,0.35,1) forwards;
-	animation-delay: 0.85s; /* empieza después de las líneas */
+    animation: drawLine 1.19s ease-in-out forwards;
+    animation-delay: 2.62s;
 }
 
 .str4 {
-	stroke: #FF0009;
-	stroke-width: 1;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	stroke-miterlimit: 22.9256;
-	fill: none;
-	stroke-dasharray: 2000;
-	stroke-dashoffset: 2000;
-	animation: drawGouter 0.4s cubic-bezier(0.65,0,0.35,1) forwards;
-	animation-delay: 1.35s;
+    animation: drawLine 1.43s ease-in-out forwards;
+    animation-delay: 2.86s;
 }
 
-/* D azul digital: usar uno de los azules permitidos (no blanco) */
+/* ====== D azul ====== */
 .str5 {
-	stroke: #2A41C8; /* azul D digital 1 — permitido */
-	stroke-width: 1;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	stroke-miterlimit: 22.9256;
-	fill: none;
-	stroke-dasharray: 3000;
-	stroke-dashoffset: 3000;
-	animation: drawD 0.5s cubic-bezier(0.65,0,0.35,1) forwards;
-	animation-delay: 1.75s; /* después de la G */
+    animation: drawLine 1.3s ease-in-out forwards;
+    animation-delay: 3.3s;
 }
-
-/* === ANIMACIONES === */
-@keyframes revealX { from { x:-210px; } to { x:0; } }
-@keyframes revealY { from { y:-170px; } to { y:0; } }
-@keyframes revealLeftToRight { from { x:-210px; } to { x:0; } }
-@keyframes revealTopToBottom { from { y:-170px; } to { y:0; } }
-@keyframes revealRightToLeft { from { x:210px; } to { x:0; } }
-@keyframes revealBottomToTop { from { y:170px; } to { y:0; } }
-
-@keyframes drawGrey { to { stroke-dashoffset: 0; } }
-@keyframes drawGinner { to { stroke-dashoffset: 0; } }
-@keyframes drawGouter { to { stroke-dashoffset: 0; } }
-@keyframes drawD { to { stroke-dashoffset: 0; } }
-
-/* === ASIGNACIÓN DE ANIMACIONES (masks) === */
-#rectX { animation: revealX 0.25s cubic-bezier(0.65,0,0.35,1) forwards; }
-#rectY { animation: revealY 0.25s cubic-bezier(0.65,0,0.35,1) forwards; animation-delay: 0.25s; }
-#rectTop    { animation: revealLeftToRight 0.2s cubic-bezier(0.65,0,0.35,1) forwards; animation-delay: 0.55s; }
-#rectRight  { animation: revealTopToBottom 0.2s cubic-bezier(0.65,0,0.35,1) forwards; animation-delay: 0.75s; }
-#rectBottom { animation: revealRightToLeft 0.2s cubic-bezier(0.65,0,0.35,1) forwards; animation-delay: 0.95s; }
-#rectLeft   { animation: revealBottomToTop 0.2s cubic-bezier(0.65,0,0.35,1) forwards; animation-delay: 1.15s; }
-

@@ -16,6 +16,9 @@ Reglas:
 - Mantener estética arquitectónica, técnica, racionalista (nada cartoon ni efectos agresivos).
 - En loaders, el logo se dibuja tipo “stroke-drawing” (línea que se traza), con animación suave.
 
+Nota: La especificación oficial del loader está en GD-DESIGN-SYSTEM.md.
+Usar SIEMPRE la versión narrativa sin límite de duración.
+
 Para más detalles de la identidad consultar:
 - `GD-DESIGN-SYSTEM.md`
 - `context/copilot-readme.md`
