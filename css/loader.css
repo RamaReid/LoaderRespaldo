@@ -1,8 +1,9 @@
-/* Estilos extraídos desde index.html (moved from <style> block) */
+/* Estilos del loader alineados al GD Design System */
+/* Paleta estricta: usar SOLO colores definidos en .github/linters/gd-color-rules.json */
 html, body {
 	height: 100%;
 	margin: 0;
-	background: radial-gradient(circle at center, #f5f5f5 0%, #e6e6e6 100%);
+	background: #121212; /* fondo oscuro requerido por el design system */
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -15,8 +16,9 @@ svg {
 }
 
 /* === TRAZOS === */
+/* Líneas técnicas: usar gris técnico digital */
 .str0 {
-	stroke: black;
+	stroke: #C4C3C4;
 	stroke-linecap: round;
 	stroke-linejoin: round;
 	stroke-miterlimit: 22.9256;
@@ -25,15 +27,16 @@ svg {
 }
 
 .str1 {
-	stroke: black;
+	stroke: #C4C3C4;
 	stroke-linecap: round;
 	stroke-linejoin: round;
 	stroke-miterlimit: 22.9256;
 	fill: none;
 }
 
+/* Trazos base (gris técnico) */
 .str2 {
-	stroke: #6E6E6E;
+	stroke: #C4C3C4;
 	stroke-width: 0.75;
 	stroke-linecap: round;
 	stroke-linejoin: round;
@@ -41,10 +44,12 @@ svg {
 	fill: none;
 	stroke-dasharray: 2000;
 	stroke-dashoffset: 2000;
-	animation: drawGrey 20s ease-out forwards;
-	animation-delay: 11s;
+	/* animación de trazado: líneas primero */
+	animation: drawGrey 0.8s cubic-bezier(0.65,0,0.35,1) forwards;
+	animation-delay: 0s;
 }
 
+/* G (rojo) mantiene el rojo oficial */
 .str3 {
 	stroke: #FF0009;
 	stroke-width: 0.75;
@@ -54,8 +59,8 @@ svg {
 	fill: none;
 	stroke-dasharray: 2000;
 	stroke-dashoffset: 2000;
-	animation: drawGinner 5s ease-in-out forwards;
-	animation-delay: 11s;
+	animation: drawGinner 0.5s cubic-bezier(0.65,0,0.35,1) forwards;
+	animation-delay: 0.85s; /* empieza después de las líneas */
 }
 
 .str4 {
@@ -67,12 +72,13 @@ svg {
 	fill: none;
 	stroke-dasharray: 2000;
 	stroke-dashoffset: 2000;
-	animation: drawGouter 6s ease-in-out forwards;
-	animation-delay: 12s;
+	animation: drawGouter 0.4s cubic-bezier(0.65,0,0.35,1) forwards;
+	animation-delay: 1.35s;
 }
 
+/* D azul digital: usar uno de los azules permitidos (no blanco) */
 .str5 {
-	stroke: #34369E;
+	stroke: #2A41C8; /* azul D digital 1 — permitido */
 	stroke-width: 1;
 	stroke-linecap: round;
 	stroke-linejoin: round;
@@ -80,8 +86,8 @@ svg {
 	fill: none;
 	stroke-dasharray: 3000;
 	stroke-dashoffset: 3000;
-	animation: drawD 6s ease-in-out forwards;
-	animation-delay: 15s; /* empieza inmediatamente después de la G */
+	animation: drawD 0.5s cubic-bezier(0.65,0,0.35,1) forwards;
+	animation-delay: 1.75s; /* después de la G */
 }
 
 /* === ANIMACIONES === */
@@ -97,11 +103,11 @@ svg {
 @keyframes drawGouter { to { stroke-dashoffset: 0; } }
 @keyframes drawD { to { stroke-dashoffset: 0; } }
 
-/* === ASIGNACIÓN DE ANIMACIONES === */
-#rectX { animation: revealX 3s cubic-bezier(0.55, 0.08, 0.44, 0.99) forwards; }
-#rectY { animation: revealY 3s cubic-bezier(0.55, 0.08, 0.44, 0.99) forwards; animation-delay: 2.7s; }
-#rectTop    { animation: revealLeftToRight 1.5s ease-in-out forwards 5.8s; }
-#rectRight  { animation: revealTopToBottom 1.5s ease-in-out forwards 7.1s; }
-#rectBottom { animation: revealRightToLeft 1.5s ease-in-out forwards 8.4s; }
-#rectLeft   { animation: revealBottomToTop 1.5s ease-in-out forwards 9.7s; }
+/* === ASIGNACIÓN DE ANIMACIONES (masks) === */
+#rectX { animation: revealX 0.25s cubic-bezier(0.65,0,0.35,1) forwards; }
+#rectY { animation: revealY 0.25s cubic-bezier(0.65,0,0.35,1) forwards; animation-delay: 0.25s; }
+#rectTop    { animation: revealLeftToRight 0.2s cubic-bezier(0.65,0,0.35,1) forwards; animation-delay: 0.55s; }
+#rectRight  { animation: revealTopToBottom 0.2s cubic-bezier(0.65,0,0.35,1) forwards; animation-delay: 0.75s; }
+#rectBottom { animation: revealRightToLeft 0.2s cubic-bezier(0.65,0,0.35,1) forwards; animation-delay: 0.95s; }
+#rectLeft   { animation: revealBottomToTop 0.2s cubic-bezier(0.65,0,0.35,1) forwards; animation-delay: 1.15s; }
 
