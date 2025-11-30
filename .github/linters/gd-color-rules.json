@@ -1,0 +1,25 @@
+{
+  "allowedColors": [
+    "#121212",
+    "#1A1A1A",
+    "#FF0009",
+    "#2A41C8",
+    "#324DDD",
+    "#C4C3C4",
+    "#FFFFFF"
+  ],
+  "forbiddenColors": [
+    "#0000FF",
+    "#FFFFFF", 
+    "#000000",
+    "#0099FF",
+    "#EDEDED",
+    "#F0F0F0"
+  ],
+  "rules": {
+    "noBackgroundBlue": true,
+    "noWhiteLetterDInAnimation": true,
+    "enforceGDPalette": true
+  }
+}
+
