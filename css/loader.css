@@ -50,18 +50,18 @@
 
 /* ====== Gris técnico ====== */
 .str2 {
-    animation: drawLine 4.76s ease-out forwards;
+    animation: drawLine 20s ease-out forwards;
     animation-delay: 2.62s;
 }
 
 /* ====== G ====== */
 .str3 {
-    animation: drawLine 1.19s ease-in-out forwards;
+    animation: drawLine 1.5s ease-in-out forwards;
     animation-delay: 2.62s;
 }
 
 .str4 {
-    animation: drawLine 1.43s ease-in-out forwards;
+    animation: drawLine 1.9s ease-in-out forwards;
     animation-delay: 2.86s;
 }
 

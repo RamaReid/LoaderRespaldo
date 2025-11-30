@@ -1,31 +1,39 @@
-// GD Loader — Loop engine (versión estable)
-
 function setupLoop() {
     const container = document.getElementById("loader-container");
     const lastStroke = container.querySelector(".str5");
 
     lastStroke.addEventListener("animationend", () => {
 
-        // Fade-out suave
-        container.style.opacity = "0";
-        container.style.transition = "opacity 0.25s linear";
+        // 1. Forzar opacidad inicial
+        container.style.opacity = "1";
 
+        // 2. Forzar reflow
+        void container.offsetWidth;
+
+        // 3. Aplicar transición ANTES del cambio
+        container.style.transition = "opacity 0.55s ease-in-out";
+
+        // 4. Fade-out
+        container.style.opacity = "0";
+
+        // 5. Swap después del fade-out
         setTimeout(() => {
-            // Clonar el SVG completo
             const svg = container.querySelector("svg");
             const clone = svg.cloneNode(true);
 
-            // Reemplazar
             container.innerHTML = "";
             container.appendChild(clone);
 
-            // Montar y volver a mostrar
-            requestAnimationFrame(() => {
-                container.style.opacity = "1";
-                setupLoop(); // reinstalar listener
-            });
+            // 6. Forzar reflow antes del fade-in
+            void container.offsetWidth;
 
-        }, 250);
+            // 7. Fade-in
+            container.style.opacity = "1";
+
+            // 8. Reinstalar el loop
+            setupLoop();
+
+        }, 550); // duración del fade-out exacta
     });
 }
 
