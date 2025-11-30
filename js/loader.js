@@ -11,7 +11,7 @@ function setupLoop() {
         void container.offsetWidth;
 
         // 3. Aplicar transición ANTES del cambio
-        container.style.transition = "opacity 0.55s ease-in-out";
+        container.style.transition = "opacity 0.9s ease-in-out";
 
         // 4. Fade-out
         container.style.opacity = "0";
