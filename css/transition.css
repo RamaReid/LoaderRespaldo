@@ -1,0 +1,11 @@
+/*
+  transition.css
+
+  - Controlará la transición visual desde el loader hacia el fondo real (background).
+  - Incluirá reglas para la transformación/posicionamiento del logo durante la transición
+    (por ejemplo: escalado, desplazamiento y máscara radial).
+  - Preparará el espacio y las capas necesarias para presentar el header después de
+    completada la transición (por ejemplo: z-index, visibilidad inicial del header).
+  - NOTA: Este archivo sólo contiene comentarios por ahora. No mezclar código del
+    loader con la transición; la integración se hará más adelante.
+*/

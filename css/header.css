@@ -1,0 +1,11 @@
+/*
+  header.css
+
+  - Estilos estructurales del header (barra de navegación principal).
+  - Aquí se describirá el comportamiento de despliegue de izquierda a derecha:
+      * Posicionamiento inicial (oculto fuera de la ventana o con opacidad 0).
+      * Transición de entrada (despliegue izquierdo→derecho) activada tras la
+        finalización de la transición desde el loader.
+      * Espacios para logo, navegación y acciones (CTA).
+  - Sólo comentarios por ahora; no implementar reglas que afecten al loader.
+*/
