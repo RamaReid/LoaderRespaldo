@@ -49,24 +49,23 @@
 #rectLeft   { animation: revealBottomToTop 0.36s ease-in-out forwards; animation-delay: 2.31s; }
 
 /* ====== Gris técnico ====== */
-.str2 {
+#loader-container .str2 {
     animation: drawLine 20s ease-out forwards;
     animation-delay: 2.62s;
 }
 
-/* ====== G ====== */
-.str3 {
+#loader-container .str3 {
     animation: drawLine 1.5s ease-in-out forwards;
     animation-delay: 2.62s;
 }
 
-.str4 {
+#loader-container .str4 {
     animation: drawLine 1.9s ease-in-out forwards;
     animation-delay: 2.86s;
 }
 
-/* ====== D azul ====== */
-.str5 {
+#loader-container .str5 {
     animation: drawLine 1.3s ease-in-out forwards;
     animation-delay: 3.3s;
 }
+

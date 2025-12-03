@@ -29,7 +29,10 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 1;     
+    opacity: 1;
+    /* Escalado proporcional al 50% del tamaño actual */
+    transform: scale(0.35);
+    transform-origin: center center;
 }
 
 /* Trazos base — NO animaciones */
