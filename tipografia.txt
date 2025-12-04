@@ -1,0 +1,99 @@
+¡Uff, me encanta el giro hacia el Fondo Negro (Dark Mode)!
+
+Para este proyecto en particular ("Casa Tandil"), es una decisión estética muy acertada. ¿Por qué?
+
+Resalta el Hormigón: El gris del cemento se ve mucho más elegante y "premium" sobre negro que sobre blanco.
+
+Potencia los colores: El cielo azul del atardecer y, sobre todo, ese muro rojo de la fachada y del hogar van a vibrar muchísimo más.
+
+Cine: Le da una atmósfera cinematográfica e inmersiva.
+
+Sin embargo, diseñar con fondo negro tiene sus trampas. Aquí te paso la guía técnica para que quede legible, elegante y estilo "Revista Living".
+
+1. La Tipografía sobre Fondo Negro (Reglas de Oro)
+
+Cuando el fondo es oscuro, el ojo humano percibe la letra blanca más "gorda" o brillante de lo que es (efecto halación).
+
+No uses Blanco Puro (#FFFFFF): El contraste es tan alto que vibra y molesta a la vista.
+
+✅ Usa: Un gris muy claro o "blanco hueso" (ej: #E0E0E0 o #F2F2F2).
+
+Aumenta el espacio (Tracking): Las letras blancas sobre negro necesitan "respirar". Pide al diseñador que aumente un poco el espacio entre letras (letter-spacing).
+
+Cuidado con las fuentes finas: Si usas una letra muy finita (Light o Thin), sobre negro puede desaparecer o verse "mordida". Usa pesos Regular o Medium.
+
+Mi recomendación de Fuentes para este fondo:
+
+Títulos (H1): Playfair Display. (Queda increíble en blanco sobre negro).
+
+Tip: Úsala en Italic (Cursiva) para el título principal. Le da una elegancia suprema.
+
+Cuerpo (P): Montserrat o Raleway.
+
+Son geométricas y modernas. Al ser redonditas, contrastan bien con la dureza rectangular del hormigón de la casa.
+
+2. Texto sobre las Fotos (El desafío de la legibilidad)
+
+Si vas a poner el título o la bajada directamente encima de la foto (por ejemplo, en la Hero Image del balcón), tienes que garantizar que se lea, tenga nubes o tenga sombras detrás.
+
+Aquí tienes 3 Soluciones Estéticas que usan las webs de arquitectura top:
+
+A. El "Degradado Invisible" (Cinemático)
+
+Es lo más elegante. Se coloca un degradado negro suave (gradiente) que sale desde abajo de la foto hacia arriba, pero solo en el 30% inferior.
+
+Efecto: La foto se ve completa, pero en la parte de abajo se oscurece lo suficiente para que el texto blanco se lea perfecto.
+
+Ideal para: La foto de portada (Hero).
+
+B. La "Caja Flotante" (Estilo Revista)
+
+No pongas el texto suelto sobre la foto. Coloca el texto dentro de una caja de color negro (o gris muy oscuro) con un poco de transparencia (ej: 80% de opacidad).
+
+Ubicación: Abajo a la izquierda o al centro.
+
+Efecto: Parece una etiqueta o un recorte de revista pegado sobre la imagen. Muy moderno.
+
+C. El "Outline" (Minimalista)
+
+Si usas una fuente grande (como Playfair Display), puedes usarla "hueca" (solo el contorno blanco, sin relleno) para el título gigante sobre la foto.
+
+Efecto: Es muy sutil y deja ver la arquitectura a través de las letras.
+
+3. Paleta de Colores Sugerida (Dark Theme)
+
+Pásale estos códigos de color (Hex Codes) al diseñador para que la web tenga la armonía de la casa:
+
+Fondo Principal: #121212 (Negro suave, estilo material, nunca negro absoluto).
+
+Texto Títulos: #F5F5F5 (Blanco humo).
+
+Texto Cuerpo: #B0B0B0 (Gris plata, para que no canse la lectura).
+
+Color de Acento (Detalles/Botones/Líneas): #C45A48 (Un tono terracota/rojo apagado, sacado del muro de la casa). Ojo: usarlo muy poquito, solo para una línea finita debajo del título o un botón de "Ver más".
+
+4. Visualización del Diseño (Ejemplo)
+
+Imagínatelo así:
+
+Pantalla completa: Fondo negro suave.
+
+Imagen Hero: La foto del balcón/cielo. En la parte inferior, un degradado negro sutil.
+
+Sobre el degradado:
+
+Título en Playfair Display Italic (Blanco): "La caja que levita"
+
+Subtítulo en Montserrat (Gris): "Tandil, Buenos Aires"
+
+Scroll hacia abajo:
+
+Aparece el texto de la historia de Cecilia y Daniel (letra gris clara sobre fondo negro).
+
+A la derecha del texto, la foto vertical del Acceso (puerta negra).
+
+Más abajo:
+
+Una franja con la foto panorámica del Living y el muro rojo. El rojo va a estallar sobre el fondo negro de la página.
+
+¿Te convence esta atmósfera más nocturna y elegante? Creo que para las fotos que tienes (donde hay mucho contraste de luz y sombra) es la mejor decisión.

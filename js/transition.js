@@ -130,6 +130,10 @@ function dispararRadialReveal() {
     startRadialReveal({
         duration: RADIAL_REVEAL_DURATION,
         origin
+    }).then(() => {
+        document.body.classList.add("app-ready");
+    }).catch(() => {
+        document.body.classList.add("app-ready");
     });
 }
 

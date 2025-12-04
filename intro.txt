@@ -1,0 +1,19 @@
+(function(){
+  const canvas = document.getElementById('introCanvas');
+  const fade = document.getElementById('fade');
+  if (!canvas) return;
+
+  let renderer, scene, camera, mesh, startTime, rafId;
+  let originalPositions = null;
+  let frameCount = 0;
+  let tmpLerpVec = null;
+  const clock = new THREE.Clock();
+
+  const textureUrl = 'assets/img/LogoGD.svg';
+
+  function init(){
+    // Preferir rendimiento: desactivar antialias y limitar DPR en resize()
+    try{
+      // Intro removed by user — stub script to avoid 404 or runtime errors if referenced.
+      console.log('assets/js/intro.js: stub (intro removed)');
+      console.error('Intro init: fallo al crear WebGLRenderer', err);

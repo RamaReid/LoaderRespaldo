@@ -1,0 +1,1513 @@
+nav, nav a, .navbar, footer, .section-title, .card-content h3, .btn, .values-list li {
+  font-family: var(--font-body);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+/* Hover/focus de enlaces del nav: escalan como el logo/menú (1.2x) */
+nav a {
+  display: inline-block; /* necesario para que el transform no afecte al layout del contenedor */
+  transition: transform 180ms ease;
+  transform-origin: center center;
+}
+nav a:hover,
+nav a:focus,
+nav a:focus-visible {
+  transform: scale(1.2);
+}
+
+/* Botón de menú hamburguesa (oculto por defecto; visible solo en móvil) */
+.nav-toggle {
+  display: none;
+  appearance: none;
+  border: none;
+  background: transparent;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.nav-toggle .hamburger,
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after {
+  content: '';
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-color);
+  border-radius: 2px;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+.nav-toggle .hamburger { position: relative; }
+.nav-toggle .hamburger::before { position: absolute; top: -6px; left: 0; }
+.nav-toggle .hamburger::after { position: absolute; top: 6px; left: 0; }
+
+/* Estado activo: convierte las líneas en una X */
+.nav-toggle.is-active .hamburger { transform: rotate(45deg); }
+.nav-toggle.is-active .hamburger::before { transform: rotate(90deg); }
+.nav-toggle.is-active .hamburger::after { opacity: 0; }
+
+/* Efecto hover/focus del botón hamburguesa: escala como el logo */
+.nav-toggle { transition: transform 180ms ease; }
+.nav-toggle:hover,
+.nav-toggle:focus,
+.nav-toggle:focus-visible { transform: scale(1.2); }
+
+html::before {
+  /* Plano arquitectónico fijo: aplica tono sepia suave para mantener consistencia editorial
+     y quedarse visible como 'aire' mientras se hace scroll (opción A) */
+  content: '';
+  display: none;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-color);
+  line-height: 1.6;
+  min-height: 100vh;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* Global typography - apply chosen fonts consistently across the project */
+html, body, input, textarea, button, select {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6, .brand .title {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-regular);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+/* Ensure navigation, footer and common UI elements inherit the site body font */
+nav, nav a, .navbar, footer, .section-title, .card-content h3, .btn, .values-list li {
+  font-family: var(--font-body);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+/* Hover/focus de enlaces del nav: escalan como el logo/menú (1.2x) */
+nav a {
+  display: inline-block; /* necesario para que el transform no afecte al layout del contenedor */
+  transition: transform 180ms ease;
+  transform-origin: center center;
+}
+nav a:hover,
+nav a:focus,
+nav a:focus-visible {
+  transform: scale(1.2);
+}
+
+/* Botón de menú hamburguesa (oculto por defecto; visible solo en móvil) */
+.nav-toggle {
+  display: none;
+  appearance: none;
+  border: none;
+  background: transparent;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.nav-toggle .hamburger,
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after {
+  content: '';
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-color);
+  border-radius: 2px;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+.nav-toggle .hamburger { position: relative; }
+.nav-toggle .hamburger::before { position: absolute; top: -6px; left: 0; }
+.nav-toggle .hamburger::after { position: absolute; top: 6px; left: 0; }
+
+/* Estado activo: convierte las líneas en una X */
+.nav-toggle.is-active .hamburger { transform: rotate(45deg); }
+.nav-toggle.is-active .hamburger::before { transform: rotate(90deg); }
+.nav-toggle.is-active .hamburger::after { opacity: 0; }
+
+/* Efecto hover/focus del botón hamburguesa: escala como el logo */
+.nav-toggle { transition: transform 180ms ease; }
+.nav-toggle:hover,
+.nav-toggle:focus,
+.nav-toggle:focus-visible { transform: scale(1.2); }
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  /* Header transparente para que el plano sepia fijo sea visible debajo (opción A) */
+  background: transparent;
+  box-shadow: none;
+  /* Preparar transición de despliegue izquierda→derecha (constante) */
+  transition: clip-path 1s linear, background 0.3s ease;
+  overflow: hidden;
+}
+
+/* Hide full-screen loader on secondary pages; keep only on pages that have body.home */
+body:not(.home) .loader-overlay {
+  display: none !important;
+}
+
+/* Slight translucent backdrop for the navbar to improve contrast over the plano */
+.navbar {
+  background: rgba(255,255,255,0.04); /* very subtle light veil */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Mostrar la porción del plano que corresponde al header */
+header::before {
+  /* Ocultar el plano en el header (evita el fondo duplicado) */
+  content: '';
+  display: none;
+}
+
+/* Opt-in background (plano arquitectónico)
+   Apply the plano only on pages that explicitly add `with-plano` to the <body>.
+   This keeps the image disabled by default and avoids duplicate backgrounds. */
+body.with-plano::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../img/Gadehause/GADEHAUSE%20plano.svg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: sepia(0.85) contrast(1.06) saturate(0.9);
+  opacity: 0.12;
+  pointer-events: none;
+  transform: scale(1);
+  transform-origin: center center;
+  z-index: -2; /* keep behind header and content */
+}
+
+/* If a page opts in, also enable the header portion of the plano */
+body.with-plano header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background-image: url('../img/Gadehause/GADEHAUSE%20plano.svg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: sepia(0.85) contrast(1.06) saturate(0.9);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.8s ease;
+}
+
+/* Also enable the plano automatically on the homepage (body.home) so the
+   main index shows the architectural plan without editing the HTML. */
+body.home::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../img/Gadehause/GADEHAUSE%20plano.svg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: sepia(0.85) contrast(1.06) saturate(0.9);
+  opacity: 0.12;
+  pointer-events: none;
+  transform: scale(1);
+  transform-origin: center center;
+  z-index: -2;
+}
+
+body.home header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background-image: url('../img/Gadehause/GADEHAUSE%20plano.svg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: sepia(0.85) contrast(1.06) saturate(0.9);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 0.8s ease;
+}
+
+/* Emergency override: remove any direct background applied to html/body
+   This forces backgrounds to be opt-in via `body.with-plano` and prevents
+   inline/page-local rules from showing the plano accidentally. */
+html, body {
+  background: none !important;
+  background-image: none !important;
+}
+
+/* Asegurar que el header muestre el fondo en páginas secundarias */
+body.secondary-page header::before {
+  opacity: 0.13 !important;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--header-padding-y-desktop) var(--header-padding-x-desktop);
+  max-width: 1200px;
+  margin: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand img {
+  width: var(--logo-size-desktop);
+  height: var(--logo-size-desktop);
+}
+
+.brand .title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--primary-color);
+  letter-spacing: 1.2px;
+}
+
+/* Make the logo behave like a button/link with visible focus */
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.brand-link:focus {
+  outline: 3px solid rgba(29,53,87,0.12);
+  outline-offset: 4px;
+}
+
+/* Hover/focus scale for logo */
+.brand-link img {
+  transition: transform 180ms ease;
+  transform-origin: center center;
+}
+
+.brand-link:hover img,
+.brand-link:focus img,
+.brand-link:focus-visible img {
+  transform: scale(1.2);
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.6rem;
+  flex-wrap: nowrap;
+  /* Preparado para revelar el menú hacia la derecha al finalizar la animación del logo */
+  transition: transform 600ms ease, opacity 600ms ease;
+}
+
+/* Alineación del nav y offset vertical controlado por --nav-offset */
+nav {
+  align-self: center;
+  margin-top: var(--nav-offset);
+}
+
+nav li {
+  font-weight: 500;
+  position: relative;
+}
+
+nav li::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width var(--transition-speed);
+  margin-top: 4px;
+}
+
+nav li:hover::after,
+nav li.active::after {
+  width: 100%;
+}
+
+/* Mobile-only header tweaks + menú hamburguesa (2 columnas) */
+/* Mobile/Tablet header tweaks + menú hamburguesa (2 columnas) */
+@media (max-width: 768px) {
+  .navbar {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr; /* logo mínimo, nav ocupa el resto */
+    align-items: stretch; /* ambas columnas misma altura */
+    gap: 0.75rem;
+    padding: var(--header-padding-y-tablet) var(--header-padding-x-tablet);
+  }
+
+  /* Logo más compacto en móvil */
+  .brand img { 
+    width: var(--logo-size-tablet);
+    height: var(--logo-size-tablet);
+  }
+
+  /* Oculta el título en móvil */
+  .brand .title { display: none; }
+
+  /* Área de navegación (columna 2): contiene menú + botón en la misma línea */
+  .nav-area {
+    grid-column: 2 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 0;
+    gap: 0.75rem;
+  }
+  .brand { grid-column: 1 / 2; display: flex; align-items: center; }
+  .nav-toggle { display: inline-flex; }
+
+  nav {
+    align-self: center;
+    /* Baja el nav en móvil al mismo offset que escritorio */
+    margin-top: var(--nav-offset);
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  /* Menú en móvil: colapsado por defecto, se despliega desde el botón hacia la izquierda */
+  nav ul {
+    display: flex;
+    position: static;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    gap: 0.8rem; /* duplicado para mantener proporción respecto a desktop */
+    white-space: nowrap;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap; /* evita salto a otra línea */
+    width: 100%; /* mantiene ancho constante */
+    /* Estado oculto por defecto (colapsado) */
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: right center; /* desde el botón hacia la izquierda */
+    pointer-events: none;
+    transition: transform 1s ease, opacity 1s ease;
+  }
+
+  /* Mejora área táctil de los enlaces en móvil sin cambiar tipografía */
+  nav a { padding: 0.4rem 0.25rem; }
+
+  /* Estado abierto: se expande en 1s de derecha a izquierda */
+  .navbar.is-open nav ul {
+    opacity: 1;
+    transform: scaleX(1);
+    pointer-events: auto;
+  }
+  
+  /* Limitar hover en pantallas chicas para evitar saltos de layout */
+  nav a:hover,
+  nav a:focus,
+  nav a:focus-visible { transform: scale(1.1); }
+  
+  .nav-toggle:hover,
+  .nav-toggle:focus,
+  .nav-toggle:focus-visible { transform: scale(1.1); }
+}
+
+/* Desktop: efecto de despliegue hacia la derecha del menú cuando el logo llega a su posición */
+@media (min-width: 769px) {
+  /* Evitar doble animación del nav en desktop: el header ya se revela con clip-path */
+  body.nav-prepare .navbar nav ul,
+  body.header-deploy .navbar nav ul {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* Pantallas muy pequeñas: ajustes extras para mantener todo en una línea */
+@media (max-width: 460px) {
+  .navbar {
+    padding: var(--header-padding-y-mobile) var(--header-padding-x-mobile);
+    gap: 0.5rem;
+  }
+  
+  /* Logo aún más compacto */
+  .brand img { 
+    width: var(--logo-size-mobile);
+    height: var(--logo-size-mobile);
+  }
+  
+  /* Reducir gap y padding al mínimo */
+  nav ul { gap: 0.5rem; }
+  nav a { 
+    padding: 0.3rem 0.15rem;
+    font-size: 0.85rem;
+  }
+  
+  /* Botón hamburguesa más compacto */
+  .nav-toggle { 
+    width: 32px; 
+    height: 32px; 
+  }
+  .nav-toggle .hamburger,
+  .nav-toggle .hamburger::before,
+  .nav-toggle .hamburger::after {
+    width: 18px;
+  }
+  
+  .nav-area { gap: 0.5rem; }
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  align-items: center;
+  gap: 3rem;
+  padding: calc(var(--header-height) + 3rem) 3rem 4rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.hero h1 {
+  font-size: var(--size-h1);
+  color: var(--primary-color);
+  font-weight: var(--fw-bold);
+}
+
+.hero p {
+  color: var(--light-text);
+  font-size: 1.1rem;
+  margin: 1rem 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.8rem;
+  background: linear-gradient(135deg, var(--primary-color), #2a9d8f);
+  color: white;
+  border-radius: 999px;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(42, 157, 143, 0.3);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(230, 57, 70, 0.35);
+}
+
+.section {
+  padding: 5rem 3rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.section-title {
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  letter-spacing: 4px;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.section h2 {
+  font-size: var(--size-h2);
+  margin-bottom: 1.5rem;
+  font-weight: var(--fw-semibold);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(29, 53, 87, 0.15), 0 2px 6px rgba(29, 53, 87, 0.1);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(29, 53, 87, 0.22), 0 4px 12px rgba(29, 53, 87, 0.15);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-content h3 {
+  margin-bottom: 0.8rem;
+}
+
+.card-content p {
+  color: var(--light-text);
+}
+
+.projects-gallery {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.projects-gallery img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Magazine block utility: en desktop usa proporción 70% imagen / 30% texto */
+.magazine-block {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.magazine-block > div { flex-basis: 0; }
+.magazine-block .media { flex: 0 0 70%; }
+.magazine-block .copy  { flex:  0 0 30%; min-width: 260px; }
+
+/* Utility classes for the magazine blocks on the home page */
+.mag-media { flex: 0 1 70%; }
+.mag-copy { flex: 0 1 30%; padding: 1rem 2rem; }
+.mag-65 { flex: 0 1 65%; }
+.mag-60 { flex: 0 1 60%; }
+.mag-40 { flex: 0 1 40%; }
+.mag-35 { flex: 0 1 35%; }
+.mag-80 { flex: 0 1 80%; }
+.mag-20 { flex: 0 1 20%; }
+.mag-media img { width:100%; display:block; height:auto; }
+.mag-copy { display:flex; flex-direction:column; justify-content:center; }
+
+/* Hero carousel: frame-free, full-bleed within its grid cell */
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  height: 420px; /* sensible default, adapts on mobile */
+  overflow: hidden;
+}
+/* Magazine spread utilities (70% image / 30% copy) */
+.magazine-spread {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr; /* ~30% / 70% */
+  gap: 2rem;
+  align-items: stretch;
+  margin: 2.5rem 0;
+}
+.magazine-spread .copy {
+  padding: 3rem 2rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.magazine-spread .copy .section-title{ letter-spacing:0.08em; text-transform:uppercase; font-size:.9rem; color:var(--muted); }
+.magazine-spread .copy h1, .magazine-spread .copy h2 { font-family: 'Libre Baskerville', serif; margin:0 0 .6rem 0; line-height:1.02; }
+.magazine-spread .copy h1{ font-size: clamp(28px, 4.6vw, 54px); }
+.magazine-spread .copy p.lead{ color:var(--muted); font-size:1.05rem; }
+
+.magazine-spread .visual {
+  position:relative;
+  overflow:hidden;
+  /* For the magazine look we want the hero / primary visuals to appear borderless
+     and full-bleed; remove radius/shadows for the main visuals. */
+  border-radius:0;
+  box-shadow: none;
+  background:#f7f5f2;
+}
+.magazine-spread .visual img,
+.magazine-spread .visual .slide{ width:100%; height:100%; display:block; object-fit:cover; }
+.magazine-spread .visual .slide{ background-position:center; background-size:cover; transform:scale(1.04); transition: transform .7s ease, filter .7s ease; }
+.magazine-spread.in-view .visual .slide{ transform:scale(1); }
+.magazine-spread .visual figcaption{ font-size:.85rem; color:#666; padding:.5rem .75rem; background:rgba(255,255,255,0.9); position:absolute; left:1rem; bottom:1rem; border-radius:6px; }
+
+/* Hero carousel small accessibility + states */
+.hero-carousel{ position:relative; min-height:340px; }
+.hero-carousel .slide{ opacity:0; transform:translateY(6px); transition: opacity .55s ease, transform .55s ease; }
+.hero-carousel .slide.active{ opacity:1; transform:none; }
+.hero-carousel .controls{ position:absolute; right:12px; bottom:12px; display:flex; gap:.5rem; }
+.hero-carousel .pause-btn, .hero-carousel .play-btn{ background:rgba(255,255,255,0.9); border:0; padding:.45rem .6rem; border-radius:6px; cursor:pointer; }
+
+@media (max-width:900px){
+  .magazine-spread{ grid-template-columns: 1fr; }
+  .magazine-spread .visual{ order:-1; }
+  .magazine-spread .copy{ padding:1.25rem; }
+  .hero-carousel{ min-height:220px; }
+}
+
+/* Make the hero media truly full-bleed: escape the centered max-width and span viewport */
+.hero.magazine-spread {
+  max-width: none;
+  width: 100vw;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: calc(50% - 50vw); /* center the section while allowing edge-to-edge visuals */
+  margin-right: calc(50% - 50vw);
+}
+.hero.magazine-spread .media {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* Ensure hero slides and first-page visuals are presented without borders */
+.hero .hero-carousel .slide,
+.magazine-spread .visual .slide,
+.below-hero-grid img,
+.magazine-block img {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Grid that groups the blocks under the hero into 2-3 responsive columns
+   to visually align with the footer columns (desktop: 3, tablet: 2, mobile: 1) */
+.below-hero-grid {
+  max-width: 1200px;
+  margin: 2rem auto 0 auto;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0 3rem;
+}
+
+@media (max-width: 1100px) {
+  .below-hero-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 700px) {
+  .below-hero-grid { grid-template-columns: 1fr; padding: 0 1.5rem; }
+}
+
+/* Make each child section inside below-hero-grid visually neutral (no card shadows) */
+.below-hero-grid .section {
+  padding: 1.25rem;
+  background: transparent;
+}
+
+.hero-carousel .slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 800ms ease;
+}
+.hero-carousel .slide.active { opacity: 1; }
+
+/* If slides contain <img>, make them fill the slide area and keep object-fit behavior */
+.hero-carousel .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Carousel controls (minimal, unobtrusive) */
+.hero-carousel .controls {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 4;
+}
+.hero-carousel .controls button {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 0.45rem 0.6rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .magazine-block { flex-direction: column; }
+  .magazine-block .media, .magazine-block .copy { flex: 1 1 100%; }
+  .hero-carousel { height: 280px; }
+}
+
+.map-container {
+  height: 450px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  margin-top: 2rem;
+}
+
+footer {
+  background: var(--primary-color);
+  color: white;
+  padding: 3rem;
+  margin-top: 4rem;
+}
+
+footer .footer-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+footer h4 {
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+footer p,
+footer a {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+}
+
+footer a:hover {
+  color: white;
+}
+
+.contact-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(29, 53, 87, 0.15);
+  display: grid;
+  gap: 2rem;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+}
+
+input,
+textarea,
+select {
+  padding: 0.9rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(69, 123, 157, 0.2);
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  transition: border var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.15);
+}
+
+textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.values-list {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+}
+
+.values-list li {
+  background: white;
+  padding: 1.4rem;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(69, 123, 157, 0.18);
+}
+
+.values-list strong {
+  display: block;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+.timeline {
+  border-left: 4px solid var(--accent-color);
+  padding-left: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2.05rem;
+  top: 0.3rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-color);
+}
+
+/* ============================================
+   LOADER / TRANSICIÓN ENTRE PÁGINAS
+   ============================================ */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: #f1faee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              visibility 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+}
+
+/* Plano arquitectónico en el loader: existe siempre; se revela con apertura radial */
+
+body:not(.secondary-page) .loader-overlay::before {
+  /* neutralizamos el pseudo-elemento histórico: no debe pintar nada
+     porque usamos la nueva estructura `.loader-bg` y la máscara SVG */
+  content: '';
+  position: absolute;
+  inset: 0;
+  display: none !important;
+  z-index: -1;
+}
+
+/* New background element that will be revealed by the SVG mask.
+   It replicates the previous visual (same image and filters), but
+   is a real element we can apply a mask to and control reliably. */
+/* .loader-bg removed: background image and mask are no longer used.
+   The loader-overlay uses a solid background color instead. */
+
+/* Apertura radial progresiva desde el centro durante los latidos */
+.loader-overlay.radial-open::before {
+  animation: radialReveal 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes radialReveal {
+  0%   { 
+    clip-path: circle(0% at 50% 50%); 
+    opacity: 0;
+  }
+  0.1% {
+    opacity: 0.18;
+  }
+  100% { 
+    clip-path: circle(150% at 50% 50%); 
+    opacity: 0.18;
+  }
+}
+
+
+.loader-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-overlay:not(.hidden) {
+  pointer-events: all;
+}
+
+/* Contenedor del SVG animado */
+.loader {
+  width: var(--loader-initial-size);
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  will-change: transform;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+.loader svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  will-change: transform;
+  position: relative;
+  z-index: 2; /* el logo por encima de las sombras */
+}
+
+/* Sombra/volumen independiente para simular profundidad sin tocar trazos */
+.loader .petal-shadow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 72%;
+  height: 60%;
+  border-radius: 50% 54% 50% 46% / 50% 46% 50% 54%; /* forma orgánica de pétalo */
+  background: radial-gradient(ellipse at 40% 45%, rgba(0,0,0,0.35), rgba(0,0,0,0.0) 60%);
+  filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity, filter;
+  z-index: 1;
+}
+
+/* Sombra de núcleo: más cerrada, nítida cuando está cerca del suelo, se desvanece cuando está alto */
+.loader .petal-shadow-core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 58%;
+  height: 48%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 42% 48%, rgba(0,0,0,0.6), rgba(0,0,0,0.0) 50%);
+  filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity, filter;
+  z-index: 1;
+}
+
+/* Animación de latido del corazón: 2 latidos suaves en 1.6s */
+.loader.heartbeat {
+  animation: heartbeat 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Transición hacia el header con trayectoria en arco */
+.loader.move-to-header {
+  animation: moveToHeader 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes moveToHeader {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    /* Valores exactos medidos desde el viewport */
+    /* Logo en header está en (12px, 8px) desde esquina superior izquierda */
+    /* Loader centrado necesita moverse (-145px, -329px) para que su centro coincida con el centro del logo */
+    transform: translate(-145px, -329px) scale(1);
+  }
+}
+
+/* Versiones responsive con referencias exactas */
+@media (max-width: 768px) {
+  .loader.move-to-header {
+    animation: moveToHeaderTablet 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+  
+  @keyframes moveToHeaderTablet {
+    0% {
+      width: var(--loader-initial-size);
+      transform: translate(0, 0);
+    }
+    60% {
+      transform: translate(calc(-40vw), calc(-35vh));
+    }
+    100% {
+      width: var(--logo-size-tablet);
+      transform: translate(
+        calc(-50vw + var(--header-padding-x-tablet) + var(--logo-size-tablet) / 2),
+        calc(-50vh + var(--header-padding-y-tablet) + var(--logo-size-tablet) / 2)
+      );
+    }
+  }
+}
+
+@media (max-width: 460px) {
+  .loader.move-to-header {
+    animation: moveToHeaderMobile 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+  
+  @keyframes moveToHeaderMobile {
+    0% {
+      width: var(--loader-initial-size);
+      transform: translate(0, 0);
+    }
+    60% {
+      transform: translate(calc(-40vw), calc(-30vh));
+    }
+    100% {
+      width: var(--logo-size-mobile);
+      transform: translate(
+        calc(-50vw + var(--header-padding-x-mobile) + var(--logo-size-mobile) / 2),
+        calc(-50vh + var(--header-padding-y-mobile) + var(--logo-size-mobile) / 2)
+      );
+    }
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.15);
+  }
+  40% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  80% {
+    transform: scale(1);
+  }
+}
+
+/* Animaciones de sombras durante los latidos */
+@keyframes shadowLifeAmbient {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate3d(-6px, 12px, 0) scale(0.96);
+    filter: blur(10px);
+  }
+  20% {
+    opacity: 0.35;
+    transform: translate(-50%, -50%) translate3d(-8px, 13px, 0) scale(1.06);
+    filter: blur(14px);
+  }
+  40% {
+    opacity: 0.18;
+    transform: translate(-50%, -50%) translate3d(-7px, 12px, 0) scale(0.98);
+    filter: blur(10px);
+  }
+  60% {
+    opacity: 0.35;
+    transform: translate(-50%, -50%) translate3d(-9px, 14px, 0) scale(1.06);
+    filter: blur(14px);
+  }
+  80% {
+    opacity: 0.20;
+    transform: translate(-50%, -50%) translate3d(-7px, 12px, 0) scale(0.99);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 0.18;
+    transform: translate(-50%, -50%) translate3d(-6px, 12px, 0) scale(0.98);
+    filter: blur(10px);
+  }
+}
+
+@keyframes shadowLifeCore {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate3d(-3px, 7px, 0) scale(0.94);
+    filter: blur(3px);
+  }
+  20% {
+    opacity: 0.60;
+    transform: translate(-50%, -50%) translate3d(-4px, 8px, 0) scale(1.02);
+    filter: blur(6px);
+  }
+  40% {
+    opacity: 0.30;
+    transform: translate(-50%, -50%) translate3d(-3px, 7px, 0) scale(0.96);
+    filter: blur(3px);
+  }
+  60% {
+    opacity: 0.60;
+    transform: translate(-50%, -50%) translate3d(-5px, 9px, 0) scale(1.02);
+    filter: blur(6px);
+  }
+  80% {
+    opacity: 0.32;
+    transform: translate(-50%, -50%) translate3d(-3px, 7px, 0) scale(0.96);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 0.26;
+    transform: translate(-50%, -50%) translate3d(-3px, 7px, 0) scale(0.96);
+    filter: blur(3px);
+  }
+}
+
+/* Aplicar animaciones de sombra cuando inicia el latido */
+.loader.heartbeat .petal-shadow {
+  animation: shadowLifeAmbient 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.loader.heartbeat .petal-shadow-core {
+  animation: shadowLifeCore 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.loader svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* Estilos para el logo animado */
+.loader .str0 {
+  stroke: black;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 22.9256;
+  stroke-dasharray: 5 3 1 3;
+  fill: none;
+}
+
+.loader .str1 {
+  stroke: black;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 22.9256;
+  fill: none;
+}
+
+.loader .str2 {
+  stroke: #6E6E6E;
+  stroke-width: 0.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 22.9256;
+  fill: none;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: drawGrey 2s ease-out forwards;
+  animation-delay: 1s;
+}
+
+.loader .str3 {
+  stroke: #FF0009;
+  stroke-width: 0.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 22.9256;
+  fill: none;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: drawGinner 0.7s ease-in-out forwards;
+  animation-delay: 1s;
+}
+
+.loader .str4 {
+  stroke: #FF0009;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 22.9256;
+  fill: none;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: drawGouter 0.8s ease-in-out forwards;
+  animation-delay: 1.2s;
+}
+
+.loader .str5 {
+  stroke: #34369E;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 22.9256;
+  fill: none;
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  animation: drawD 1s ease-in-out forwards;
+  animation-delay: 1.8s;
+}
+
+/* Animaciones de máscara */
+@keyframes revealX { from { x:-210px; } to { x:0; } }
+@keyframes revealY { from { y:-170px; } to { y:0; } }
+@keyframes revealLeftToRight { from { x:-210px; } to { x:0; } }
+@keyframes revealTopToBottom { from { y:-170px; } to { y:0; } }
+@keyframes revealRightToLeft { from { x:210px; } to { x:0; } }
+@keyframes revealBottomToTop { from { y:170px; } to { y:0; } }
+
+/* Animaciones de dibujo */
+@keyframes drawGrey { to { stroke-dashoffset: 0; } }
+@keyframes drawGinner { to { stroke-dashoffset: 0; } }
+@keyframes drawGouter { to { stroke-dashoffset: 0; } }
+@keyframes drawD { to { stroke-dashoffset: 0; } }
+
+/* Asignación de animaciones a rectángulos */
+.loader #rectX { animation: revealX 0.6s cubic-bezier(0.55, 0.08, 0.44, 0.99) forwards; }
+.loader #rectY { animation: revealY 0.6s cubic-bezier(0.55, 0.08, 0.44, 0.99) forwards; animation-delay: 0.4s; }
+.loader #rectTop    { animation: revealLeftToRight 0.3s ease-in-out forwards 0.8s; }
+.loader #rectRight  { animation: revealTopToBottom 0.3s ease-in-out forwards 1s; }
+.loader #rectBottom { animation: revealRightToLeft 0.3s ease-in-out forwards 1.2s; }
+.loader #rectLeft   { animation: revealBottomToTop 0.3s ease-in-out forwards 1.4s; }
+
+/* Fade para transiciones suaves de página */
+body.page-transition {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+body.page-loaded {
+  opacity: 1;
+}
+
+/* Quitamos el desvanecimiento del header para que se perciba el clip-path */
+
+/* Secuencia de despliegue: header (izquierda→derecha) */
+/* Estado preparado: header oculto por clip desde la derecha */
+body.header-prep header {
+  clip-path: inset(0 100% 0 0);
+}
+
+/* Despliegue del header: se revela hacia la derecha en ~1s */
+body.header-deploy header {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Asegurar transición del header para disparar transitionend */
+header {
+  transition: clip-path 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Contenido: revelado diagonal desde esquina superior derecha (cortina con transform) */
+main, footer {
+  position: relative;
+  background: transparent;
+  overflow: hidden; /* necesario para cortar la cortina al salir */
+  z-index: 1; /* Asegurar que quede debajo del header sticky */
+}
+
+/* Asegurar que el fondo está visible desde el principio, antes de las animaciones */
+body.content-prep main,
+body.content-prep footer {
+  background: transparent;
+}
+
+/* Hoja/cortina: pseudo-elemento que cubre y se retira en diagonal */
+body.content-prep main::before,
+body.content-prep footer::before,
+body.content-deploy main::before,
+body.content-deploy footer::before {
+  content: "";
+  position: absolute;
+  /* Cortina enorme centrada para garantizar cobertura total */
+  left: 50%;
+  top: 50%;
+  width: 200vmax;
+  height: 200vmax;
+  z-index: 50; /* asegurar que quede sobre el contenido del main */
+  background: var(--wipe-color);
+  pointer-events: none;
+  transform-origin: center center;
+  will-change: transform;
+  transition: transform var(--wipe-duration) var(--wipe-ease);
+}
+
+/* Estado inicial: cortina cubre todo (inclinada) */
+body.content-prep main::before,
+body.content-prep footer::before {
+  /* Cortina en reposo: centrada, cubierta total, rotada 45° */
+  transform: translate(-50%, -50%) rotate(var(--wipe-angle)) translateX(0);
+}
+
+/* Estado desplegado: cortina se retira hacia abajo-izquierda */
+body.content-deploy main::before,
+body.content-deploy footer::before {
+  /* Retirar la cortina moviéndola a lo largo de su eje X (rotada 45°) */
+  transform: translate(-50%, -50%) rotate(var(--wipe-angle)) translateX(var(--wipe-distance));
+}
+
+/* ============================================
+   NAVEGACIÓN DE PROYECTOS (ANTERIOR/SIGUIENTE)
+   ============================================ */
+.project-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 900;
+  display: flex;
+  gap: 1rem;
+}
+
+.project-nav.nav-prev {
+  left: 3.5rem;
+}
+
+.project-nav.nav-next {
+  right: 3.5rem;
+}
+
+.project-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--primary-color);
+  box-shadow: none;
+  padding: 0;
+}
+
+.project-nav-btn:hover {
+  background: transparent;
+  transform: scale(1.1);
+  box-shadow: none;
+}
+
+.project-nav-btn svg {
+  width: 100%;
+  height: 100%;
+  transition: filter 0.25s ease;
+}
+
+/* Halo sutil en hover y foco accesible */
+.project-nav-btn:hover svg,
+.project-nav-btn:focus-visible svg {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9))
+          drop-shadow(0 0 2px rgba(0, 0, 0, 0.25));
+}
+
+/* Efecto hover: agrandar la G en botón izquierdo */
+.project-nav.nav-prev .project-nav-btn:hover #letra-g-interior,
+.project-nav.nav-prev .project-nav-btn:hover #letra-g-exterior {
+  transform: scale(1.35);
+  transform-origin: center;
+}
+
+/* Efecto hover: agrandar la D en botón derecho */
+.project-nav.nav-next .project-nav-btn:hover #letra-d {
+  transform: scale(1.35);
+  transform-origin: center;
+}
+
+/* Transición suave para las letras */
+#letra-g-interior,
+#letra-g-exterior,
+#letra-d {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Responsive: mover botones a la parte inferior en móviles */
+@media (max-width: 768px) {
+  .project-nav {
+    position: fixed;
+    top: auto;
+    bottom: 2.5rem;
+    transform: none;
+  }
+  
+  .project-nav.nav-prev {
+    left: 2rem;
+  }
+  
+  .project-nav.nav-next {
+    right: 2rem;
+  }
+  
+  .project-nav-btn {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero {
+    padding: calc(var(--header-height) + 2rem) 1.5rem 3rem;
+  }
+
+  .section {
+    padding: 3.5rem 1.5rem;
+  }
+
+  footer {
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+.fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fade-in-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
