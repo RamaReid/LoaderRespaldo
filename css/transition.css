@@ -1,3 +1,4 @@
+
 /*
   transition.css
 
@@ -61,5 +62,50 @@
     20%  { transform: scale(0.985); }
     100% { transform: scale(1); }
 }
+
+/* LOGO DE TRANSICIÓN (SVG B) */
+#logo-transition-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 50;
+}
+
+/* 1) Lift */
+@keyframes gdLiftUpLogo {
+    0%   { transform: translate(-50%, -50%) scale(1); }
+    100% { transform: translate(-50%, -58%) scale(1.07); }
+}
+
+/* 2) Drop */
+@keyframes gdDropDownLogo {
+    0%   { transform: translate(-50%, -58%) scale(1.07); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* 3) Impact */
+@keyframes gdImpactPulseLogo {
+    0%   { transform: translate(-50%, -50%) scale(1); }
+    20%  { transform: translate(-50%, -50%) scale(0.985); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.lift-logo {
+    animation: gdLiftUpLogo 0.45s cubic-bezier(0.32, 0.72, 0.25, 1) forwards;
+}
+
+.drop-logo {
+    animation: gdDropDownLogo 0.38s cubic-bezier(0.3, 1, 0.4, 1) forwards;
+}
+
+.impact-logo {
+    animation: gdImpactPulseLogo 0.22s ease-out forwards;
+}
+
 
 

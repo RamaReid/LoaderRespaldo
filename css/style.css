@@ -35,40 +35,64 @@ html, body {
     transform-origin: center center;
 }
 
+#logo-final {
+    width: min(95vw, 900px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    /* Escalado proporcional al 50% del tamaño actual */
+    transform: scale(0.35);
+    transform-origin: center center;
+}
+
 /* Trazos base — NO animaciones */
-.str0, .str1, .str2, .str3, .str4, .str5 {
+.str0, .str1, .str2, .str3, .str4, .str5, 
+.logoL0, .logoL1, .logoL2, .logoL3, .logoL4, .logoL5 {
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
 }
 
-.str0 { stroke: var(--gd-grey); stroke-dasharray: 5 3 1 3; }
-.str1 { stroke: var(--gd-grey); }
+.str0, .logoL0{ stroke: var(--gd-grey); stroke-dasharray: 5 3 1 3; }
+.str1, .logoL1{ stroke: var(--gd-grey); }
 
-.str2 {
+.str2, .logoL2{
     stroke: var(--gd-grey);
     stroke-width: 0.75;
+}
+
+.str2{
     stroke-dasharray: 2000;
     stroke-dashoffset: 2000;
 }
 
-.str3 {
+.str3, .logoL3{
     stroke: var(--gd-red);
     stroke-width: 0.75;
+}
+
+.str3{
     stroke-dasharray: 2000;
     stroke-dashoffset: 2000;
 }
 
-.str4 {
+.str4, .logoL4{
     stroke: var(--gd-red);
     stroke-width: 1;
+}
+
+.str4{
     stroke-dasharray: 2000;
     stroke-dashoffset: 2000;
 }
 
-.str5 {
+
+.str5, .logoL5{
     stroke: var(--gd-blue);
-    stroke-width: 1;
-    stroke-dasharray: 3000;
+    stroke-width: 1;  
+}
+
+.str5{stroke-dasharray: 3000;
     stroke-dashoffset: 3000;
 }

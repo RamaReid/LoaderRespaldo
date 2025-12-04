@@ -1,2 +1,8 @@
+# .gitkeep
+#
+# Placeholder file to ensure `img/hero/` is tracked by Git.
+# Añadir aquí las imágenes del Hero (recursos gráficos usados en la sección Hero).
+# No borrar este archivo si la carpeta está vacía; su propósito es mantener la carpeta
+# versionada hasta que se suban los activos reales.
 # Este archivo existe para que la carpeta `img/hero` quede versionada en git.
 # No eliminar: mantiene el directorio en el repositorio mientras está vacío.

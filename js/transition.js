@@ -1,20 +1,16 @@
 /* ================================================================
-   GD Arquitectura — transition.js (versión final)
-   Control total de la transición del loader hacia el sitio:
-   - 2 ciclos mínimos
-   - espera a que cargue la página
-   - corta el loop (loader.js respeta detenerLoop)
-   - ejecuta elevación → caída → impacto
-   - controla reveal del plano global
+   GD Arquitectura — transition.js (VERSIÓN FINAL COMPLETA)
+   - Cuenta ciclos del loader (SVG A)
+   - Espera mínimo 2 ciclos + página cargada
+   - Corta el loop del loader
+   - Elimina el loader del DOM
+   - Muestra logo.svg (SVG B) y le aplica lift → drop → impacto
+   - Dispara clases de reveal para el fondo/plano
    ================================================================ */
 
-/* ---------------------------------------------------------------
-   ESTADOS GLOBALES
---------------------------------------------------------------- */
-let ciclos = 0;                 // ciclos completos del loader
-let paginaLista = false;        // true cuando la página terminó de cargar
-let transicionIniciada = false; // evita disparar dos veces
-
+let ciclos = 0;
+let paginaLista = false;
+let transicionIniciada = false;
 
 /* ---------------------------------------------------------------
    1) Detectar carga total de la página
@@ -26,31 +22,25 @@ document.onreadystatechange = () => {
     }
 };
 
-
 /* ---------------------------------------------------------------
-   2) Detectar cuando se completa cada ciclo del loader
+   2) Contar ciclos del loader:
+      escuchamos cualquier animationend en el contenedor y
+      filtramos cuando el target es .str5 (D azul del SVG del loader)
 --------------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
-
     const container = document.getElementById("loader-container");
-
     if (!container) return;
 
-    // Delegación: cada vez que termine la animación del trazo final
     container.addEventListener("animationend", (e) => {
-        if (e.target.classList.contains("str5")) {
+        if (e.target.classList && e.target.classList.contains("str5")) {
             ciclos++;
             verificarCondiciones();
         }
     });
-
 });
 
-
 /* ---------------------------------------------------------------
-   3) Verificar si se cumplen las condiciones para iniciar transición:
-      - Página completamente cargada
-      - Loader ejecutó al menos 2 ciclos
+   3) Verificar condiciones para iniciar la transición
 --------------------------------------------------------------- */
 function verificarCondiciones() {
     if (transicionIniciada) return;
@@ -60,65 +50,63 @@ function verificarCondiciones() {
     }
 }
 
-
 /* ---------------------------------------------------------------
-   4) TRANSICIÓN PRINCIPAL (lift → drop → impacto → reveal)
+   4) TRANSICIÓN PRINCIPAL
+      - Cortar loop del loader
+      - Fade-out y remove del loader
+      - Mostrar logo.svg (SVG B)
+      - lift → drop → impacto
+      - Enganchar reveal del fondo
 --------------------------------------------------------------- */
 function iniciarTransicion() {
-
     transicionIniciada = true;
-    detenerLoop = true; // corta loop en loader.js
+    detenerLoop = true; // para que el loader deje de reiniciarse
 
-    const container = document.getElementById("loader-container");
-    const body = document.body;
+    const loader = document.getElementById("loader-container");
+    const logoFinal = document.getElementById("logo-final");
 
-    if (!container) return;
-
-    /* -----------------------------------------------------------
-       A) Semireveal del plano (overlay empieza a bajar)
-    ----------------------------------------------------------- */
-    body.classList.add("reveal-start");
-
-    /* -----------------------------------------------------------
-       B) ELEVACIÓN DEL LOGO
-    ----------------------------------------------------------- */
-    container.classList.add("gd-lift");
-
-    const liftDuration = 450;  // ms (coincide con transition.css)
-    const dropDuration = 380;  // ms
-
-
-    /* -----------------------------------------------------------
-       C) CAÍDA
-    ----------------------------------------------------------- */
-    setTimeout(() => {
-
-        container.classList.remove("gd-lift");
-        container.classList.add("gd-drop");
-
-        /* -------------------------------------------------------
-           D) IMPACTO (pulso técnico final)
-        ------------------------------------------------------- */
-        setTimeout(() => {
-
-            container.classList.add("gd-impact");
-
-            /* ---------------------------------------------------
-               E) REVEAL FINAL DEL PLANO
-            --------------------------------------------------- */
-            body.classList.add("reveal-end");
-
-            /* ---------------------------------------------------
-               F) Aquí conectamos con la siguiente etapa:
-                  - ondas desde el impacto
-                  - movimiento del logo al header
-                  - despliegue del header
-            --------------------------------------------------- */
-            // startRippleWaves();   ← lo agregaremos después
-            // moveLogoToHeader();   ← siguiente paso
-            // deployHeader();       ← después del movimiento
-
-        }, dropDuration);
-
-    }, liftDuration);
+    if (loader) {
+        loader.style.display = "none";   // chau loader
+    }
+    if (logoFinal) {
+        logoFinal.style.display = "flex"; // aparece el SVG y nada más
+    }
 }
+
+    // 3) Mostrar logo.svg (SVG B) en el mismo lugar
+    logoContainer.style.transition = "opacity 0.4s ease-out";
+    logoContainer.style.opacity = "1";
+
+    // 4) Arrancar secuencia lift → drop → impacto
+    const liftDuration = 450;
+    const dropDuration = 380;
+    const impactDuration = 220;
+
+    // Pequeño delay para que el logo ya esté visible
+    setTimeout(() => {
+        // LIFT
+        logoImg.classList.add("lift-logo");
+
+        setTimeout(() => {
+            // DROP
+            logoImg.classList.remove("lift-logo");
+            logoImg.classList.add("drop-logo");
+
+            setTimeout(() => {
+                // IMPACTO
+                logoImg.classList.add("impact-logo");
+
+                // 5) Disparar reveal del plano / fondo
+                body.classList.add("reveal-start");
+
+                // Opcional: después de un tiempo, terminar reveal
+                setTimeout(() => {
+                    body.classList.add("reveal-end");
+                }, impactDuration + 300);
+
+            }, dropDuration);
+
+        }, liftDuration);
+
+    }, 200);
+
