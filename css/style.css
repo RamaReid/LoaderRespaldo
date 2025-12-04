@@ -8,6 +8,10 @@
     --gd-red: #FF0009;
     --gd-blue: #2A41C8;
     --gd-white: #FFFFFF;
+    --gd-anchor-x: 50.77%;
+    --gd-anchor-y: 69.86%;
+    --gd-logo-width: calc(min(95vw, 900px) * 0.35);
+    --gd-cover: #050814;
 }
 
 * {
@@ -18,32 +22,71 @@
 
 html, body {
     height: 100%;
-    background: var(--gd-bg);
+    background: var(--gd-cover);
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+body {
+    position: relative;
+    overflow: hidden;
+    background: var(--gd-cover);
+}
+
+#plano-layer {
+    position: fixed;
+    inset: 0;
+    background-image: url("../img/Plano MAGAHAUSEsinFondo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+    filter: saturate(1) brightness(1);
+    opacity: 0.4;
+}
+
+#background-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--gd-cover);
+    z-index: -1;
+    pointer-events: none;
+    -webkit-mask: url(#radialHoleMask);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 0 0;
+    mask: url(#radialHoleMask);
+    mask-repeat: no-repeat;
+    mask-position: 0 0;
+    mask-size: 100% 100%;
 }
 
 #loader-container {
-    width: min(95vw, 900px);
+    width: var(--gd-logo-width);
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 1;
-    /* Escalado proporcional al 50% del tamaño actual */
-    transform: scale(0.35);
-    transform-origin: center center;
+    transform-origin: var(--gd-anchor-x) var(--gd-anchor-y);
 }
 
 #logo-final {
-    width: min(95vw, 900px);
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 1;
-    /* Escalado proporcional al 50% del tamaño actual */
-    transform: scale(0.35);
-    transform-origin: center center;
+    transform-origin: var(--gd-anchor-x) var(--gd-anchor-y);
+}
+
+#logo-transition-container {
+    width: var(--gd-logo-width);
+}
+
+#loader-container svg,
+#logo-final svg {
+    width: 100%;
+    height: auto;
 }
 
 /* Trazos base — NO animaciones */

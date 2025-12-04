@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Demo: Revelado radial</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root{ --duration: 11250ms; --ease: cubic-bezier(0.19,1,0.22,1); --brand-blue: #020280; }
+    html,body{ height:100%; margin:0; }
+    .stage{ position:relative; width:100%; height:100vh; overflow:hidden; }
+    /* Bottom background (visible after reveal) - opt-in via body.with-plano */    
+    body.with-plano .bg-bottom{ position:absolute; inset:0; background: url('../background2.png') center/cover no-repeat; display:flex; align-items:center; justify-content:center; }
+    .bg-bottom h1{ color:#222; font-family:system-ui,Segoe UI,Roboto,Arial; }
+    /* Top cover (single rule kept below; no duplicates) */
+    /* Reveal implemented using an inline SVG mask so we can create a true
+       hole in the blue overlay that reveals the textured background below
+       without painting a fake circle. The mask's circle radius is driven
+       from JS for precise control. */
+    .bg-top{ --mask-cx:50%; --mask-cy:50%; position:absolute; inset:0; background: var(--brand-blue); display:grid; place-items:center; -webkit-mask: url(#radialHoleMask); -webkit-mask-repeat: no-repeat; -webkit-mask-position: 0 0; mask: url(#radialHoleMask); mask-repeat: no-repeat; mask-position: 0 0; }
+    .bg-top h1{ color:white; font-family:system-ui,Segoe UI,Roboto,Arial; }
+    /* keep the .reveal-hole element hidden (legacy fallback) */
+    .reveal-hole{ display:none; }
+    /* Controls */
+    .controls{ position:fixed; right:1rem; top:1rem; z-index:40; }
+    button{ padding:.5rem .8rem; font-size:1rem; }
+  </style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="bg-bottom" id="bgBottom">
+      <h1>Fondo gris</h1>
+    </div>
+    <div class="bg-top" id="bgTop">
+      <h1>Fondo azul (cubierta)</h1>
+      <div class="reveal-hole" id="revealHole" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="startBtn">Iniciar revelado radial</button>
+  </div>
+
+  <!-- Inline SVG mask used to cut a hole in the blue overlay. Black = transparent in mask -->
+  <svg id="radialMaskSVG" width="100%" height="100%" preserveAspectRatio="none" style="position:absolute;left:0;top:0;pointer-events:none;">
+    <defs>
+      <mask id="radialHoleMask" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+        <rect id="maskRect" x="0" y="0" width="100%" height="100%" fill="white"></rect>
+        <circle id="maskHole" cx="0" cy="0" r="0" fill="black"></circle>
+      </mask>
+    </defs>
+  </svg>
+
+  <script>
+    // Expose a simple API to start the reveal
+    (function(){
+      var bgTop = document.getElementById('bgTop');
+      var hole = document.getElementById('revealHole');
+      var startBtn = document.getElementById('startBtn');
+
+      // Start the radial reveal from the center by scaling the .reveal-hole
+      function startRadialReveal(options){
+        options = options || {};
+        var duration = options.duration || 2500;
+        var easing = options.easing || 'cubic-bezier(0.19,1,0.22,1)';
+        // allow customizing the origin (x,y in percent) where the hole starts
+        var origin = options.origin || { x: 50, y: 50 };
+
+          // set animation duration variable
+          document.documentElement.style.setProperty('--duration', duration + 'ms');
+
+          // compute stage rectangle to determine a safe max radius
+          var stage = document.getElementById('stage');
+          var rect = stage.getBoundingClientRect();
+
+          // locate SVG and mask elements and size the SVG to the stage in px
+          var svgEl = document.getElementById('radialMaskSVG');
+          var maskCircle = document.getElementById('maskHole');
+          var maskRect = document.getElementById('maskRect');
+          if(!maskCircle || !svgEl) return Promise.resolve();
+          // size SVG to match stage px dimensions and set viewBox accordingly
+          svgEl.setAttribute('width', rect.width);
+          svgEl.setAttribute('height', rect.height);
+          svgEl.setAttribute('viewBox', '0 0 ' + rect.width + ' ' + rect.height);
+          // guardamos la posición sólo si las coordenadas son válidas
+          if (isFinite(rect.left) && isFinite(rect.top)) {
+            svgEl.style.left = rect.left + 'px';
+            svgEl.style.top = rect.top + 'px';
+          } else {
+            svgEl.style.left = '0px'; svgEl.style.top = '0px';
+          }
+          // ensure mask rect covers full area in user units
+          try{ maskRect.setAttribute('width', rect.width); maskRect.setAttribute('height', rect.height); }catch(e){}
+
+          // set mask circle center in pixel coords relative to stage
+          var cxPx = (origin.x/100) * rect.width;
+          var cyPx = (origin.y/100) * rect.height;
+          maskCircle.setAttribute('cx', cxPx);
+          maskCircle.setAttribute('cy', cyPx);
+          maskCircle.setAttribute('r', 0);
+
+          // animate radius via requestAnimationFrame for consistent results
+          var maxDist = Math.hypot(rect.width, rect.height) * 1.2; // ensure full coverage
+          var start = performance.now();
+          return new Promise(function(resolve){
+            function step(now){
+              var t = Math.min(1, (now - start) / duration);
+              var eased = 1 - Math.pow(1 - t, 3);
+              var r = eased * maxDist;
+              maskCircle.setAttribute('r', r);
+              if(t < 1){ requestAnimationFrame(step); } else {
+                try{ bgTop.style.display = 'none'; }catch(e){}
+                resolve();
+              }
+            }
+            requestAnimationFrame(step);
+          });
+      }
+
+      window.startRadialReveal = startRadialReveal;
+
+      startBtn.addEventListener('click', function(){
+        startRadialReveal({ duration: 13500, origin: { x:50, y:50 } });
+      });
+    })();
+  </script>
+</body>
+</html>
