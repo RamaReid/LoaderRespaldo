@@ -60,7 +60,7 @@ body {
     line-height: 1.5;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding-top: 16px;
+    padding-top: 0;
 }
 
 body:not(.app-ready) {
@@ -137,33 +137,25 @@ body.app-ready #loader-stage {
     pointer-events: none;
 }
 
-.gd-app {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-body.app-ready .gd-app {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 .gd-header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
     z-index: 30;
+    padding: clamp(0.5rem, 2vw, 1.5rem) 0;
     background: transparent;
     border-bottom: none;
     box-shadow: none;
-    overflow: hidden;
-    transition: clip-path 1s linear, background 0.3s ease;
+    overflow: visible;
+    opacity: 0;
+    pointer-events: none;
+    transition: clip-path 1s linear, opacity 0.6s ease;
     isolation: isolate;
+}
+body.header-visible .gd-header {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .navbar {
@@ -175,13 +167,13 @@ body.app-ready .gd-app {
     align-items: center;
     justify-content: space-between;
     gap: 1.25rem;
-    background: rgba(5, 8, 20, 0.5);
-    border: 0.75px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 0 0.35px rgba(255, 255, 255, 0.35);
+    background: rgba(4, 6, 14, 0.5);
+    border: 3px solid rgba(255, 255, 255, 0.35);
+    box-shadow: none;
     border-radius: 999px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: background 0.3s ease, border 0.3s ease;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: border 0.3s ease;
     height: 100px;
 }
 
@@ -221,19 +213,18 @@ body.dark-theme .brand-logo {
     filter: contrast(110%);
 }
 
-.brand-copy {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
-
-.brand-copy .title {
+.brand-tagline {
+    display: inline-flex;
+    align-items: center;
+    margin-left: clamp(0.75rem, 1.5vw, 1.5rem);
     font-family: var(--font-heading);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.95rem;
-    font-weight: 500;
+    font-size: 1.05rem;
+    letter-spacing: 0.1em;
+    font-weight: var(--fw-semibold);
+    line-height: 1;
     color: var(--gd-white);
+    white-space: nowrap;
+    text-rendering: optimizeLegibility;
 }
 
 .nav-area {
@@ -373,8 +364,14 @@ nav {
         height: var(--logo-size-tablet);
     }
 
-    .brand-copy {
+    .brand-tagline {
         display: none;
+    }
+
+    #header-destination {
+        top: var(--header-padding-y-tablet, 16px);
+        left: var(--header-padding-x-tablet, 16px);
+        width: var(--logo-size-tablet);
     }
 
     .nav-area {
@@ -443,6 +440,12 @@ nav {
     .brand-logo {
         width: var(--logo-size-mobile);
         height: var(--logo-size-mobile);
+    }
+
+    #header-destination {
+        top: var(--header-padding-y-mobile, 12px);
+        left: var(--header-padding-x-mobile, 12px);
+        width: var(--logo-size-mobile);
     }
 
     nav ul {
@@ -877,67 +880,7 @@ html, body {
     border: 1px dashed rgba(255, 255, 255, 0.2);
     margin-bottom: 1rem;
     flex: 1;
-body.app-ready #loader-stage {
-    opacity: 0;
-    pointer-events: none;
-}
 
-.gd-app {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--photo-gap);
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-body.app-ready .gd-app {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-.gd-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: var(--photo-gap);
-    padding: 4rem 2.5rem 5rem;
-}
-
-
-.section {
-    max-width: 1200px;
-    margin: 0 auto;
-    width: calc(100% - clamp(2rem, 6vw, 6rem));
-}
-
-.section-full {
-    width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: clamp(3rem, 6vw, 5rem) clamp(4vw, 8vw, 8rem);
-}
-
-.hero-revista-section.section-full {
-    max-width: none;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-}
-
-.hero-revista-section {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-    min-height: calc(100vh - 140px);
-    justify-content: center;
-}
-
-.hero-revista-shell {
-    width: 100%;
-    max-width: 1600px;
     margin: 0 auto;
     min-height: inherit;
 }
