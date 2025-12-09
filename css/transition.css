@@ -66,11 +66,7 @@
 
 /* LOGO DE TRANSICIÓN (SVG B) */
 #logo-transition-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transform-origin: var(--gd-anchor-x) var(--gd-anchor-y);
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,22 +76,22 @@
 
 /* 1) Lift */
 @keyframes gdLiftUpLogo {
-    0%   { transform: translate(-50%, -50%) scale(1); }
-    100% { transform: translate(-50%, -61%) scale(1.5); }
+    0%   { transform: scale(1); }
+    100% { transform: translateY(-32px) scale(1.5); }
 }
 
 /* 2) Drop */
 @keyframes gdDropDownLogo {
-    0%   { transform: translate(-50%, -61%) scale(1.5); }
-    70%  { transform: translate(-50%, -50%) scale(0.96); }
-    100% { transform: translate(-50%, -50%) scale(1); }
+    0%   { transform: translateY(-32px) scale(1.5); }
+    70%  { transform: translateY(0) scale(0.96); }
+    100% { transform: translateY(0) scale(1); }
 }
 
 /* 3) Impact */
 @keyframes gdImpactPulseLogo {
-    0%   { transform: translate(-50%, -50%) scale(1); }
-    40%  { transform: translate(-50%, -50%) scale(0.985); }
-    100% { transform: translate(-50%, -50%) scale(1); }
+    0%   { transform: scale(1); }
+    40%  { transform: scale(0.985); }
+    100% { transform: scale(1); }
 }
 .lift-logo {
     animation: gdLiftUpLogo 1s cubic-bezier(0.33, 0.67, 0.5, 1) forwards;

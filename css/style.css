@@ -150,7 +150,7 @@ body.app-ready #loader-stage {
     overflow: visible;
     opacity: 0;
     pointer-events: none;
-    transition: clip-path 1s linear, opacity 0.6s ease;
+    transition: clip-path 1s linear, opacity 2.5s ease;
     isolation: isolate;
 }
 body.header-visible .gd-header {
@@ -368,12 +368,6 @@ nav {
         display: none;
     }
 
-    #header-destination {
-        top: var(--header-padding-y-tablet, 16px);
-        left: var(--header-padding-x-tablet, 16px);
-        width: var(--logo-size-tablet);
-    }
-
     .nav-area {
         grid-column: 2 / 3;
         display: flex;
@@ -440,12 +434,6 @@ nav {
     .brand-logo {
         width: var(--logo-size-mobile);
         height: var(--logo-size-mobile);
-    }
-
-    #header-destination {
-        top: var(--header-padding-y-mobile, 12px);
-        left: var(--header-padding-x-mobile, 12px);
-        width: var(--logo-size-mobile);
     }
 
     nav ul {
