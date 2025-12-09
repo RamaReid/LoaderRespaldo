@@ -11,21 +11,19 @@
   function loadHeroIframe() {
     var shell = document.getElementById('hero-revista-shell');
     if (!shell || shell.dataset.loaded === '1') return;
-
-    var iframe = document.createElement('iframe');
-    iframe.id = 'hero-iframe';
-    iframe.title = 'Hero Revista';
-    iframe.src = 'hero-revista/index.html';
-    iframe.loading = 'lazy';
-    iframe.setAttribute('aria-hidden', 'false');
-    iframe.style.background = 'transparent';
-    iframe.style.width = '100%';
-    iframe.style.height = '100%';
-    iframe.style.border = '0';
-
-    shell.appendChild(iframe);
-    shell.dataset.loaded = '1';
-    shell.setAttribute('aria-hidden', 'false');
+    // NOTE: We no longer auto-inject the iframe here. The caller may
+    // explicitly call `window.loadHeroIframe()` when they want the
+    // hero content to load. This preserves the visual narrative of the
+    // header and prevents the hero content from covering the plane
+    // prematurely.
+    // Ensure any previously injected iframe is removed (cleanup from
+    // earlier runs/tests).
+    var existing = shell.querySelector('#hero-iframe');
+    if (existing) {
+      existing.parentNode.removeChild(existing);
+    }
+    shell.dataset.loaded = '0';
+    shell.setAttribute('aria-hidden', 'true');
   }
 
   function whenAppReady(cb) {
@@ -33,7 +31,7 @@
     // finished). We listen for the `header-visible` class and then the
     // `transitionend` event for the `opacity` property. As a fallback we
     // use a timeout based on the computed transition duration.
-    var HERO_APPEAR_PAUSE = 500; // ms pause after header transition ends
+    var HERO_APPEAR_PAUSE = 1000; // ms pause after header transition ends
 
     function onHeaderReady() {
       var headerEl = document.querySelector('.gd-header');
@@ -61,7 +59,13 @@
           if (fired) return;
           fired = true;
           headerEl.removeEventListener('transitionend', onEnd);
-          setTimeout(cb, HERO_APPEAR_PAUSE);
+          // After header finished fading, wait the configured pause,
+          // then add `hero-visible` to the body and invoke the callback
+          // which will reveal/load the hero iframe.
+          setTimeout(function () {
+            document.body.classList.add('hero-visible');
+            cb();
+          }, HERO_APPEAR_PAUSE);
         }
       };
 
@@ -72,6 +76,7 @@
         if (fired) return;
         fired = true;
         headerEl.removeEventListener('transitionend', onEnd);
+        document.body.classList.add('hero-visible');
         cb();
       }, maxDur + HERO_APPEAR_PAUSE + 200);
     }
@@ -94,10 +99,13 @@
     // Wait a tiny bit after app-ready so transitions settle
     whenAppReady(function () {
       var shell = document.getElementById('hero-revista-shell');
+      // The `hero-visible` class will have been added by whenAppReady
+      // before this callback runs — now unhide the shell and load.
       if (shell) {
+        // Reveal only the container; do NOT inject the iframe content.
         shell.setAttribute('aria-hidden', 'false');
+        shell.dataset.loaded = '0';
       }
-      loadHeroIframe();
     });
   }
 
@@ -106,6 +114,31 @@
   } else {
     init();
   }
+  // Expose a manual loader so the app or a dev action can load the
+  // heavy iframe when desired (after the user confirms the narrative
+  // step completed).
+  window.loadHeroIframe = function () {
+    var shell = document.getElementById('hero-revista-shell');
+    if (!shell || shell.dataset.loaded === '1') return;
+
+    var iframe = document.createElement('iframe');
+    iframe.id = 'hero-iframe';
+    iframe.title = 'Hero Revista';
+    iframe.src = 'hero-revista/index.html';
+    iframe.loading = 'lazy';
+    iframe.setAttribute('aria-hidden', 'false');
+    iframe.style.background = 'transparent';
+    iframe.setAttribute('allowTransparency', 'true');
+    iframe.setAttribute('frameborder', '0');
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = '0';
+
+    shell.appendChild(iframe);
+    shell.dataset.loaded = '1';
+    shell.setAttribute('aria-hidden', 'false');
+  };
+
 })();
 // home.js
 
