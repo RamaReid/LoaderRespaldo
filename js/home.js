@@ -29,12 +29,14 @@
   }
 
   function whenAppReady(cb) {
-    if (document.body.classList.contains('app-ready')) {
+    // Wait for header to be visible (the header is displayed earlier
+    // in the transition sequence via the `header-visible` class).
+    if (document.body.classList.contains('header-visible')) {
       return cb();
     }
 
     var mo = new MutationObserver(function () {
-      if (document.body.classList.contains('app-ready')) {
+      if (document.body.classList.contains('header-visible')) {
         mo.disconnect();
         cb();
       }
@@ -46,7 +48,15 @@
   function init() {
     // Wait a tiny bit after app-ready so transitions settle
     whenAppReady(function () {
-      setTimeout(loadHeroIframe, 200);
+      // Small delay so the header animation/appearance settles,
+      // then reveal and load the iframe.
+      setTimeout(function () {
+        var shell = document.getElementById('hero-revista-shell');
+        if (shell) {
+          shell.setAttribute('aria-hidden', 'false');
+        }
+        loadHeroIframe();
+      }, 220);
     });
   }
 

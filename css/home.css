@@ -16,6 +16,10 @@
     justify-content: center;
     margin: calc(var(--header-padding-y-desktop, 20px) + 1rem) 0;
     padding: 0 1rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 360ms ease, visibility 0ms linear 360ms;
 }
 
 .hero-revista-shell {
@@ -28,6 +32,14 @@
     box-shadow: none;
     display: flex;
     align-items: stretch;
+}
+
+/* Mostrar el marco sólo después de que el header esté armado */
+body.header-visible .hero-revista-section {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 80ms;
 }
 
 #hero-iframe {
