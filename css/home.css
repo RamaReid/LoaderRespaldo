@@ -1,3 +1,50 @@
+/* home.css
+
+   Estilos para la sección Hero (hero-revista).
+   El diseño toma la estética del header (cápsula, fondo semitransparente,
+   borde y radio) y la aplica a un contenedor mayor que ocupa la mayor
+   parte de la ventana.
+
+   Notas:
+   - Reusar variables declaradas en `:root` en `css/style.css`.
+   - El iframe interno carga `hero-revista/index.html` y queda aislado.
+*/
+
+.hero-revista-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: calc(var(--header-padding-y-desktop, 20px) + 1rem) 0;
+    padding: 0 1rem;
+}
+
+.hero-revista-shell {
+    width: min(1400px, 95vw);
+    height: min(96vh, 1100px);
+    background: rgba(4, 6, 14, 0.5);
+    border: 3px solid rgba(255, 255, 255, 0.35);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: none;
+    display: flex;
+    align-items: stretch;
+}
+
+#hero-iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+    background: transparent;
+}
+
+@media (max-width: 768px) {
+    .hero-revista-shell {
+        width: calc(100vw - 32px);
+        height: calc(100vh - 120px);
+        border-radius: 14px;
+    }
+}
 /*
   home.css
 

@@ -9,6 +9,7 @@
   <!-- CSS loader -->
   <link rel="stylesheet" href="css/loader.css">
   <link rel="stylesheet" href="css/transition.css">
+    <link rel="stylesheet" href="css/home.css">
   
 </head>
 
@@ -157,6 +158,13 @@
         </div>
     </header>
 
+    <!-- Hero: revista embebida mediante iframe (lazy-load) -->
+    <section id="hero-revista-section" class="hero-revista-section" aria-label="Hero Revista">
+        <div class="hero-revista-shell" id="hero-revista-shell" aria-hidden="true">
+            <!-- iframe se inyecta dinámicamente desde `js/home.js` -->
+        </div>
+    </section>
+
         <!-- JS opcional para fade-out -->
         <script src="js/loader.js"></script>
         <script src="js/transition.js"></script>
@@ -189,5 +197,6 @@
                 });
             });
         </script>
+        <script src="js/home.js"></script>
 </body>
 </html>

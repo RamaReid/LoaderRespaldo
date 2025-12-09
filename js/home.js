@@ -1,3 +1,61 @@
+/* js/home.js
+
+   Lazy-load the hero iframe (`hero-revista/index.html`) once the page
+   transition has completed and the app is ready. Uses a MutationObserver
+   fallback to detect the `body.app-ready` class.
+*/
+
+(function () {
+  'use strict';
+
+  function loadHeroIframe() {
+    var shell = document.getElementById('hero-revista-shell');
+    if (!shell || shell.dataset.loaded === '1') return;
+
+    var iframe = document.createElement('iframe');
+    iframe.id = 'hero-iframe';
+    iframe.title = 'Hero Revista';
+    iframe.src = 'hero-revista/index.html';
+    iframe.loading = 'lazy';
+    iframe.setAttribute('aria-hidden', 'false');
+    iframe.style.background = 'transparent';
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = '0';
+
+    shell.appendChild(iframe);
+    shell.dataset.loaded = '1';
+    shell.setAttribute('aria-hidden', 'false');
+  }
+
+  function whenAppReady(cb) {
+    if (document.body.classList.contains('app-ready')) {
+      return cb();
+    }
+
+    var mo = new MutationObserver(function () {
+      if (document.body.classList.contains('app-ready')) {
+        mo.disconnect();
+        cb();
+      }
+    });
+
+    mo.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  function init() {
+    // Wait a tiny bit after app-ready so transitions settle
+    whenAppReady(function () {
+      setTimeout(loadHeroIframe, 200);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 // home.js
 
 // - Ideas generales para microanimaciones del Hero y la página Home:
