@@ -29,16 +29,61 @@
   }
 
   function whenAppReady(cb) {
-    // Wait for header to be visible (the header is displayed earlier
-    // in the transition sequence via the `header-visible` class).
+    // Wait until the header is fully visible (i.e. its opacity transition
+    // finished). We listen for the `header-visible` class and then the
+    // `transitionend` event for the `opacity` property. As a fallback we
+    // use a timeout based on the computed transition duration.
+    var HERO_APPEAR_PAUSE = 500; // ms pause after header transition ends
+
+    function onHeaderReady() {
+      var headerEl = document.querySelector('.gd-header');
+      if (!headerEl) {
+        setTimeout(cb, HERO_APPEAR_PAUSE);
+        return;
+      }
+
+      var computed = window.getComputedStyle(headerEl);
+      var durations = (computed.transitionDuration || '0s').split(',').map(function (s) {
+        return parseFloat(s) || 0;
+      });
+      var maxDur = Math.max.apply(null, durations) * 1000;
+
+      // If there's no transition duration, just wait the extra pause.
+      if (!maxDur) {
+        setTimeout(cb, HERO_APPEAR_PAUSE);
+        return;
+      }
+
+      var fired = false;
+      var onEnd = function (e) {
+        // prefer the opacity transition end, but accept any if needed
+        if (!e || e.propertyName === 'opacity' || e.propertyName === 'opacity ') {
+          if (fired) return;
+          fired = true;
+          headerEl.removeEventListener('transitionend', onEnd);
+          setTimeout(cb, HERO_APPEAR_PAUSE);
+        }
+      };
+
+      headerEl.addEventListener('transitionend', onEnd);
+
+      // Fallback: ensure callback is called eventually
+      setTimeout(function () {
+        if (fired) return;
+        fired = true;
+        headerEl.removeEventListener('transitionend', onEnd);
+        cb();
+      }, maxDur + HERO_APPEAR_PAUSE + 200);
+    }
+
     if (document.body.classList.contains('header-visible')) {
-      return cb();
+      return onHeaderReady();
     }
 
     var mo = new MutationObserver(function () {
       if (document.body.classList.contains('header-visible')) {
         mo.disconnect();
-        cb();
+        onHeaderReady();
       }
     });
 
@@ -48,15 +93,11 @@
   function init() {
     // Wait a tiny bit after app-ready so transitions settle
     whenAppReady(function () {
-      // Small delay so the header animation/appearance settles,
-      // then reveal and load the iframe.
-      setTimeout(function () {
-        var shell = document.getElementById('hero-revista-shell');
-        if (shell) {
-          shell.setAttribute('aria-hidden', 'false');
-        }
-        loadHeroIframe();
-      }, 220);
+      var shell = document.getElementById('hero-revista-shell');
+      if (shell) {
+        shell.setAttribute('aria-hidden', 'false');
+      }
+      loadHeroIframe();
     });
   }
 
